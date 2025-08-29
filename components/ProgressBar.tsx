@@ -1,11 +1,11 @@
 'use client';
 
-import { useEffect } from 'react';
+import { Suspense, useEffect } from 'react';
 import { usePathname, useSearchParams } from 'next/navigation';
 import NProgress from 'nprogress';
 import 'nprogress/nprogress.css';
 
-export default function ProgressBar() {
+function ProgressBarContent() {
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
@@ -16,7 +16,6 @@ export default function ProgressBar() {
       trickleSpeed: 200,
     });
 
-    // Handle all link clicks
     const handleClick = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
       const anchor = target.closest('a');
@@ -26,12 +25,10 @@ export default function ProgressBar() {
       }
     };
 
-    // Handle history changes (back/forward buttons)
     const handleHistoryChange = () => {
       NProgress.start();
     };
 
-    // Add event listeners
     document.addEventListener('click', handleClick);
     window.addEventListener('popstate', handleHistoryChange);
 
@@ -42,9 +39,16 @@ export default function ProgressBar() {
   }, []);
 
   useEffect(() => {
-    // Complete progress when route changes
     NProgress.done();
   }, [pathname, searchParams]);
 
   return null;
+}
+
+export default function ProgressBar() {
+  return (
+    <Suspense fallback={null}>
+      <ProgressBarContent />
+    </Suspense>
+  );
 }

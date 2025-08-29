@@ -8,7 +8,7 @@ interface BlogCardProps {
 
 export default function BlogCard({ post }: BlogCardProps) {
   return (
-    <article className="card hover:shadow-lg transition-shadow">
+    <article key={post.title} className="card hover:shadow-lg transition-shadow">
       <div className="relative h-48 w-full overflow-hidden">
         <CldImage
           src={post.image}

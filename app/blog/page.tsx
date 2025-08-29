@@ -11,7 +11,6 @@ export default function BlogPage() {
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
   const [sortBy, setSortBy] = useState<'newest' | 'oldest'>('newest');
   const [blogPosts, setBlogPosts] = useState<BlogPost[]>([]);
-  // const [availableTags, setAvailableTags] = useState<string[]>(['NextJs','typescript']);
   const availableTags = ['nextjs','typescript' , 'mongodb'];
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);

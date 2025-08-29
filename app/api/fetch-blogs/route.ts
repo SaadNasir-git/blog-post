@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { closeDatabaseConnection, executeTypedQuery } from '@/lib/mysql2';
+import { sqlconnection } from '@/lib/mysql2';
+import { ResultSetHeader } from 'mysql2';
 
 export async function GET(request: NextRequest) {
   try {
@@ -42,20 +43,20 @@ export async function GET(request: NextRequest) {
     const orderBy = sortBy === 'oldest' ? 'ASC' : 'DESC';
     
     // Get paginated results - FIXED: Order by 'date' column
-    const rows = await executeTypedQuery(
+    const [rows] = await sqlconnection.query<ResultSetHeader>(
       `SELECT * FROM blogpost ${whereClause} ORDER BY date ${orderBy} LIMIT ? OFFSET ?`,
       [...queryParams, limit, offset]
     );
     
     // Get total count for pagination
-    const countResult = await executeTypedQuery(
+    const countResult = await sqlconnection.query<ResultSetHeader & {total:number}>(
       `SELECT COUNT(*) as total FROM blogpost ${whereClause}`,
       queryParams
     );
     
     const total = (countResult)[0].total;
 
-    closeDatabaseConnection()
+    console.log(rows)
     
     return NextResponse.json({
       success: true,

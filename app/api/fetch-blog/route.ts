@@ -1,13 +1,13 @@
 'use server'
 
-import { closeDatabaseConnection, executeTypedQuery } from "@/lib/mysql2";
+import { sqlconnection } from "@/lib/mysql2";
+import { ResultSetHeader, RowDataPacket } from "mysql2";
 import { NextResponse } from "next/server";
 
 export async function POST(request:Request) {
     try {
         const body = await request.json();
-        const rows = await executeTypedQuery('SELECT * FROM blogpost WHERE slug=?',[body.slug]);
-        closeDatabaseConnection()
+        const [rows] = await sqlconnection.query<ResultSetHeader & RowDataPacket[]>('SELECT * FROM blogpost WHERE slug=?',[body.slug]);
         return NextResponse.json({
             success: true,
             data: rows[0]
