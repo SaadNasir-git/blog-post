@@ -55,8 +55,6 @@ export async function GET(request: NextRequest) {
     );
     
     const total = (countResult)[0].total;
-
-    console.log(rows)
     
     return NextResponse.json({
       success: true,
