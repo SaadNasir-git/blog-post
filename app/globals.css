@@ -261,3 +261,11 @@ body {
   opacity: 1;
   transform: rotate(3deg) translate(0px, -4px);
 }
+
+.text-blue-600{
+  @apply text-blue-600
+}
+
+code::-webkit-scrollbar{
+  display: none;
+}

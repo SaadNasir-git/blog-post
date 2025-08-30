@@ -1,5 +1,5 @@
 'use server'
-
+// <a target="_blank" rel="noopener noreferrer nofollow" class="text-blue-600 hover:text-blue-700 hover:underline" href="https://www.mongodb.com/products/tools/compass">mongodb Atlas</a>
 import { sqlconnection } from "@/lib/mysql2";
 import { ResultSetHeader, RowDataPacket } from "mysql2";
 import { NextResponse } from "next/server";
