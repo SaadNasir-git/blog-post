@@ -45,9 +45,14 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
     // Use requestAnimationFrame to ensure DOM is fully rendered
     const timer = setTimeout(() => {
       const preElements = document.querySelectorAll('pre');
-
+      const ps = document.querySelectorAll('p')
+      
+      ps.forEach((p) => {if (p.innerHTML == '') {
+        p.innerHTML = '<br/>'
+      }})
+      
       preElements.forEach((pre) => {
-        // Skip if this pre already has a copy button (to avoid duplicates)
+        
         if (pre.querySelector('.copy-button')) return;
 
         const copyButton = document.createElement('button');
