@@ -273,3 +273,83 @@ body {
 code::-webkit-scrollbar{
   display: none;
 }
+
+.list-decimal{
+  @apply list-decimal
+}
+
+.list-disc{
+  @apply list-disc
+}
+
+.ml-6{
+  @apply ml-6
+}
+
+.my-5{
+  @apply my-5
+}
+
+.inline{
+  @apply inline
+}
+
+.rounded-md{
+  @apply rounded-md
+}
+
+.w-full{
+  @apply w-full
+}
+
+.bg-gray-800{
+  @apply bg-gray-800
+}
+
+.text-gray-100{
+  @apply text-gray-100
+}
+
+.p-4{
+  @apply p-4
+}
+
+.rounded{
+  @apply rounded-md
+}
+
+.my-4{
+  @apply my-4
+}
+
+.text-white{
+  @apply text-white
+}
+
+.bg-gray-800{
+  @apply bg-gray-800
+}
+
+.px-1{
+  @apply px-1
+}
+
+.bg-gray-800{
+  @apply bg-gray-800
+}
+
+.text-gray-100{
+  @apply text-gray-100
+}
+
+.p-4{
+  @apply p-4
+}
+
+.overflow-x-auto{
+  @apply overflow-x-auto
+}
+
+.relative{
+  @apply relative
+}
