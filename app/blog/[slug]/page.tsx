@@ -8,6 +8,18 @@ import { common, createLowlight } from 'lowlight';
 import { toHtml } from 'hast-util-to-html';
 import { notFound } from 'next/navigation';
 import Loader from '@/components/Loader';
+import javascript from 'highlight.js/lib/languages/javascript';
+import typescript from 'highlight.js/lib/languages/typescript';
+import css from 'highlight.js/lib/languages/css';
+import xml from 'highlight.js/lib/languages/xml';
+import python from 'highlight.js/lib/languages/python';
+import java from 'highlight.js/lib/languages/java';
+import cpp from 'highlight.js/lib/languages/cpp';
+import bash from 'highlight.js/lib/languages/bash';
+import sql from 'highlight.js/lib/languages/sql';
+import json from 'highlight.js/lib/languages/json';
+import markdown from 'highlight.js/lib/languages/markdown';
+import yaml from 'highlight.js/lib/languages/yaml';
 
 interface BlogPostPageProps {
   params: Promise<{ slug: string }>;
@@ -17,6 +29,35 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
   const slug = use(params);
   const [loading, setloading] = useState(true)
   const [post, setPost] = useState<BlogPost>()
+
+  // Create lowlight instance and register languages
+  const lowlight = createLowlight(common);
+
+  // Register all the same languages as in the editor
+  lowlight.register('javascript', javascript);
+  lowlight.register('typescript', typescript);
+  lowlight.register('css', css);
+  lowlight.register('html', xml);
+  lowlight.register('python', python);
+  lowlight.register('java', java);
+  lowlight.register('cpp', cpp);
+  lowlight.register('bash', bash);
+  lowlight.register('shellscript', bash);
+  lowlight.register('sql', sql);
+  lowlight.register('json', json);
+  lowlight.register('markdown', markdown);
+  lowlight.register('yaml', yaml);
+  lowlight.register('yml', yaml);
+
+  // Register aliases
+  lowlight.register('js', javascript);
+  lowlight.register('ts', typescript);
+  lowlight.register('shell', bash);
+  lowlight.register('sh', bash);
+
+  // Add fallback for javascript-react and typescript-react aliases
+  lowlight.register('javascriptreact', javascript);
+  lowlight.register('typescriptreact', typescript);
 
   useEffect(() => {
     const fetch = async () => {
@@ -36,9 +77,6 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
     }
   }, [post, loading])
 
-
-  const lowlight = createLowlight(common);
-
   useEffect(() => {
     if (!post) return;
 
@@ -57,7 +95,7 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
 
         const copyButton = document.createElement('button');
         copyButton.innerHTML = `
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height"16" fill="currentColor" viewBox="0 0 16 16">
           <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z"/>
           <path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z"/>
         </svg>
@@ -106,7 +144,6 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
         pre.insertAdjacentHTML('afterbegin', html);
         pre.querySelector('.ribbon')?.insertAdjacentElement('afterbegin', copyButton)
 
-
         // Update the highlighted code
         try {
           const codeElement = pre.querySelector('code');
@@ -115,7 +152,11 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
             const languageClass = Array.from(codeElement.classList).find(cls =>
               cls.startsWith('language-')
             );
-            const language = languageClass ? languageClass.replace('language-', '') : 'plaintext';
+            let language = languageClass ? languageClass.replace('language-', '') : 'plaintext';
+
+            // Handle language aliases
+            if (language === 'javascriptreact') language = 'javascript';
+            if (language === 'typescriptreact') language = 'typescript';
 
             const result = lowlight.highlight(language, codeElement.textContent);
             codeElement.innerHTML = toHtml(result);
