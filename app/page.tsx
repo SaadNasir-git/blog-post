@@ -87,7 +87,7 @@ export default function Home() {
 
         {/* Error State */}
         {error && !isLoading && (
-          <div className="text-center py-12 px-4">
+          <div className="text-center py-12 px-4 bg-black">
             <div className="max-w-md mx-auto">
               <div className="w-16 h-16 mx-auto mb-4 bg-red-500/20 rounded-full flex items-center justify-center">
                 <span className="text-2xl text-red-500">!</span>
@@ -111,13 +111,13 @@ export default function Home() {
         {/* Featured Posts Grid */}
         {!isLoading && !error && featuredPosts.length > 0 && (
           <>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 bg-black">
               {featuredPosts.map((post) => (
                 <BlogCard key={post.id} post={post} />
               ))}
             </div>
 
-            <div className="text-center mt-10">
+            <div className="text-center mt-10 bg-black">
               <Link
                 href="/blog"
                 className="inline-flex items-center text-blue-400 hover:text-blue-200 font-medium transition-colors group"
