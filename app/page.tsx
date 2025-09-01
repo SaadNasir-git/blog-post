@@ -37,7 +37,7 @@ export default function Home() {
   }, [fetchFeaturedPosts]);
 
   return (
-    <div className="space-y-20">
+    <div className="space-y-20 bg-black">
       {/* Enhanced Hero Section */}
       <section className="relative py-20 overflow-hidden">
         <div className="absolute inset-0 -z-10 bg-gradient-to-br from-gray-900 to-gray-800"></div>

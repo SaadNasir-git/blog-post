@@ -19,10 +19,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="scroll-smooth">
-      <body className={`${inter.className} min-h-screen flex flex-col bg-gray-900 transition-colors text-white`}>
+      <body className={`${inter.className} min-h-screen flex flex-col bg-black transition-colors text-white`}>
         <ProgressBar />
         <Header />
-        <main>
+        <main className='bg-black'>
           {children}
         </main>
         <Footer />
