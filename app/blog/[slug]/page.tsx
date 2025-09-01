@@ -62,7 +62,6 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
   useEffect(() => {
     const fetch = async () => {
       const response = await axios.post('/api/fetch-blog', slug);
-      console.log(response.data.data)
       setPost(response.data.data)
       setloading(false)
     }

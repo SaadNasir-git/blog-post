@@ -35,10 +35,8 @@ export const getDatabaseConnection = async (): Promise<mysql.Connection> => {
       bigNumberStrings: true
     });
 
-    console.log('Successfully connected to MySQL database');
     return connection;
   } catch (error) {
-    console.error('Database connection failed:', error);
     connection = null; // Ensure we don't reuse a failed connection
     throw new Error(`Database connection failed: ${error instanceof Error ? error.message : String(error)}`);
   }
