@@ -78,7 +78,7 @@ export default function Home() {
       </section>
 
       {/* Enhanced Featured Posts Section */}
-      <section className="container mx-auto px-4 py-12">
+      <section className="container mx-auto px-4 py-12 bg-black">
 
         {/* Loading State */}
         {isLoading && (
