@@ -47,7 +47,6 @@ export const closeDatabaseConnection = async (): Promise<void> => {
   if (connection) {
     try {
       await connection.end();
-      console.log('Database connection closed');
     } catch (error) {
       console.error('Error closing database connection:', error);
     } finally {
