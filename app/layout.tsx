@@ -22,7 +22,7 @@ export default function RootLayout({
       <body className={`${inter.className} min-h-screen flex flex-col bg-black transition-colors text-white`}>
         <ProgressBar />
         <Header />
-        <main className='bg-black'>
+        <main className='bg-gray-900/95'>
           {children}
         </main>
         <Footer />
