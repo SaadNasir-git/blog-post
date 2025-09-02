@@ -37,7 +37,7 @@ export default function Home() {
   }, [fetchFeaturedPosts]);
 
   return (
-    <div className="space-y-20 bg-black">
+    <div className="space-y-20 bg-gray-900/95">
       {/* Enhanced Hero Section */}
       <section className="relative py-20 overflow-hidden">
         <div className="absolute inset-0 -z-10 bg-gradient-to-br from-gray-900 to-gray-800"></div>
@@ -78,7 +78,7 @@ export default function Home() {
       </section>
 
       {/* Enhanced Featured Posts Section */}
-      <section className="container mx-auto px-4 py-12 bg-black">
+      <section className="container mx-auto px-4 py-12 bg-transparent">
 
         {/* Loading State */}
         {isLoading && (
@@ -87,7 +87,7 @@ export default function Home() {
 
         {/* Error State */}
         {error && !isLoading && (
-          <div className="text-center py-12 px-4 bg-black">
+          <div className="text-center py-12 px-4 bg-transparent">
             <div className="max-w-md mx-auto">
               <div className="w-16 h-16 mx-auto mb-4 bg-red-500/20 rounded-full flex items-center justify-center">
                 <span className="text-2xl text-red-500">!</span>
@@ -111,13 +111,13 @@ export default function Home() {
         {/* Featured Posts Grid */}
         {!isLoading && !error && featuredPosts.length > 0 && (
           <>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 bg-black">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 bg-transparent">
               {featuredPosts.map((post) => (
                 <BlogCard key={post.id} post={post} />
               ))}
             </div>
 
-            <div className="text-center mt-10 bg-black">
+            <div className="text-center mt-10 bg-transparent">
               <Link
                 href="/blog"
                 className="inline-flex items-center text-blue-400 hover:text-blue-200 font-medium transition-colors group"
@@ -133,7 +133,7 @@ export default function Home() {
 
         {/* Empty State */}
         {!isLoading && !error && featuredPosts.length === 0 && (
-          <div className="text-center py-12 px-4">
+          <div className="text-center py-12 px-4 bg-transparent">
             <div className="max-w-md mx-auto">
               <div className="w-16 h-16 mx-auto mb-4 bg-gray-800 rounded-full flex items-center justify-center">
                 <svg className="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
