@@ -186,7 +186,7 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
     return (
       <main className='w-full bg-gray-900 p-4'>
         <article className="mx-auto py-10 container md:w-3/5">
-          <div className="relative h-64 md:h-96 w-full mb-8 rounded-xl overflow-hidden">
+          <div className="relative w-full mb-8 rounded-xl overflow-hidden">
             <CldImage
               src={post.image}
               alt={post.title}
